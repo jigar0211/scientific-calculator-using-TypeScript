@@ -203,18 +203,18 @@ function eventFunction() {
     const secondbutton = document.querySelector<HTMLButtonElement>("#secondbtn")!
     secondbutton.addEventListener("click",() => {
         if (flag == 1) {
-            for (let element of document.getElementsByClassName('firstvalue') as HTMLCollectionOf<Element>) {
+            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
               (element as HTMLElement).style.display = "none";
             }
-            for (let element of document.getElementsByClassName('secondvalue') as HTMLCollectionOf<Element>) {
+            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
               (element as HTMLElement).style.display = "inline-block";
             }
             flag = 0;
           } else {
-            for (let element of document.getElementsByClassName('secondvalue') as HTMLCollectionOf<Element>) {
+            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
               (element as HTMLElement).style.display = "none";
             }
-            for (let element of document.getElementsByClassName('firstvalue') as HTMLCollectionOf<Element>) {
+            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
               (element as HTMLElement).style.display = "inline-block";
             }
             flag = 1;

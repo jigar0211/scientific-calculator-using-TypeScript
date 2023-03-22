@@ -202,19 +202,19 @@ function eventFunction() {
     const secondbutton = document.querySelector("#secondbtn");
     secondbutton.addEventListener("click", () => {
         if (flag == 1) {
-            for (let element of document.getElementsByClassName('firstvalue')) {
+            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
                 element.style.display = "none";
             }
-            for (let element of document.getElementsByClassName('secondvalue')) {
+            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
                 element.style.display = "inline-block";
             }
             flag = 0;
         }
         else {
-            for (let element of document.getElementsByClassName('secondvalue')) {
+            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
                 element.style.display = "none";
             }
-            for (let element of document.getElementsByClassName('firstvalue')) {
+            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
                 element.style.display = "inline-block";
             }
             flag = 1;
