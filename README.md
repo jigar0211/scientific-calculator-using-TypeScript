@@ -1,6 +1,9 @@
 # ![icons8-calculator-28](https://user-images.githubusercontent.com/122254160/227201241-3d713958-ce79-4345-8b8e-f732eb9ed720.png)  Scientific Calculator Using TypeScript ![typescript-22](https://user-images.githubusercontent.com/122254160/225262064-ef7a65d1-1b86-40b9-bd93-ace56cb0025f.png)
 ## ![icons8-programming-flag-28](https://user-images.githubusercontent.com/122254160/227199765-15b1bd41-2e39-4103-a65c-f6f9e16bcf47.png) **Languages has been used for the project**
 ![My Skills](https://skillicons.dev/icons?i=html,css,bootstrap,js,typescript)
+
+## :rocket: Live Demonstraion
+- [ Click Here to Preview The Calculator](https://subtle-lollipop-1c4694.netlify.app/)
 ## ![icons8-about-28](https://user-images.githubusercontent.com/122254160/227203854-e55cdbbb-e495-4082-8c62-88f479c45330.png) **What is typescript**
 - **💻 TypeScript is a programming language developed by Microsoft 🚀 that is a typed superset of JavaScript 🌐. It offers features such as static typing 🙅‍♂️, interfaces 🤝, classes 🏫, modules 📦, and decorators 🎀, making it easier to write and maintain large-scale applications. TypeScript code is transpiled to JavaScript code 🔄 and can run in any JavaScript environment 🌍, including web browsers 🌐 and Node.js 🚀. It has excellent tooling support 🛠️ and is a popular choice for building complex applications 🏗️.**
 ## ![icons8-source-code-28](https://user-images.githubusercontent.com/122254160/227211977-c2262cad-e1be-44b7-901b-b3983010440a.png) **Some Use-cases Of Typescript In This Project**
