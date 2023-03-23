@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .body {
+    height: 1000vh;
+  }
+  .container-fluid {
+    font-size: 24px;
+    margin: auto;
+    width: auto;
+    height: auto;
+    margin-top: 11.8rem;
+    position: relative;
+  }
+  .display-container {
+    display: flex;
+    font-size: 2rem;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    align-items: center; 
+    justify-content: end;
+    width: 100%;
+    height: 8vh;
+  }  
+  .container {
+    width: 27rem;
+    /* padding-left: var(--bs-gutter-x,.0rem);
+    padding-right: var(--bs-gutter-x,.0rem); */
+  }
+  .calculator {
+    background-color: #f2f2f2;
+  }
+  .formula {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .x {
+    margin-top: 0.2rem;
+  }
+  .pi {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .delete {
+    margin-top: 0.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .plus {
+    margin-bottom: 0.3rem;
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  /* For Input Bar */
+  .input-bar {
+    height: 5rem;
+  }
+  .ans-input-bar{
+    height: 3.5rem;
+  }
+  input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #f4f5f5;
+    outline: none;
+  }
+  .ans-input-bar
+  {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #f4f5f5;
+    outline: none;
+  }
+  /* For Input Bar */
+  /* For Dropdown btn */
+  .dropbtn {
+    border: none;
+    cursor: pointer;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    /* min-width: 120px; */
+    z-index: 1;
+  }
+  .dropdown-content button {
+    color: black;
+    padding: 0.4rem 0.4rem;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content button:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  /* Button Over */
+  /* For Trigonometry Dropdown */
+  .trigonomerty
+  {
+    background-color: #ffffff;
+    width: 9.4rem;
+  }
+  
+  .row-2,
+  col {
+    height: 2.8rem;
+  }
+  .row-3,
+  col {
+    height: 2.8rem;
+  }
+  .row-4,
+  col {
+    height: 2.8rem;
+  }
+  .row-5,
+  col {
+    height: 2.8rem;
+  }
+  .row-6 col {
+    height: 2.8rem;
+  }
+  .functionscolor {
+    background-color: #f4f5f5;
+  }
+  .functionscolor:hover {
+    background-color: #ccc;
+  }
+  .numberscolor {
+    background-color: #fdfdfd;
+  }
+  .numberscolor:hover {
+    background-color: rgba(255, 255, 255, 0.329);
+  }
+  .row11col-b {
+    background-color: #91c1e7;
+  }
+  .row11col-b:hover {
+    background-color: #3da5fa;
+  }
+  .row, button {
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-left: 0px;
+    background: none;
+  }
+  .secondvalue {
+    display: none;
+  }
+  .anothertrigo {
+    display: none;
+  }
+  .degbtn {
+    font-weight: bold;
+  }
