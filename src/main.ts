@@ -774,128 +774,160 @@ function eventFunction() {
     }
     // function used to solve first all the multiplicatio in parenthesis
     function solveMultiplicationAndDivisionInParenthesis() {
-        do {
-            for (let j = calculatorArray.length - 1; j >= 0; j--) {
-                if (calculatorArray[j] === ")") {
-                    finalParenthesis = j;
-                    break;
-                }
+        let finalParenthesis: number = 0;
+      
+        while (calculatorArray.includes("(") && calculatorArray.includes(")")) {
+          // Find the innermost pair of parentheses
+          for (let j = calculatorArray.length - 1; j >= 0; j--) {
+            if (calculatorArray[j] === ")") {
+              finalParenthesis = j;
+              break;
             }
-            for (let i = 0; i < calculatorArray.length; i++) {
-                if (calculatorArray[i] === "(" && i < finalParenthesis) {
-                    parenthesisCounter = i;
-                    if (typeof parenthesisCounter === 'number') {
-                        counter = parenthesisCounter + 1;
-                      }
-                }
+          }
+          let parenthesisCounter: number | undefined;
+          let counter: number | undefined;
+      
+          for (let i = 0; i < calculatorArray.length; i++) {
+            if (calculatorArray[i] === "(" && i < finalParenthesis) {
+              parenthesisCounter = i;
+              counter = parenthesisCounter + 1;
             }
-            for (let i: number = <number>parenthesisCounter; i < finalParenthesis; i++) {
+          }
+      
+          if (typeof counter === "number") {
+            let toLoop: boolean = true;
+            while (toLoop === true && counter < finalParenthesis) {
+              toLoop = false;
+              for (let i = counter; i < finalParenthesis; i++) {
                 if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
+                  toLoop = true;
+                  break;
+                }
+              }
+              if (toLoop === true) {
+                multiplyDivide(counter);
+                sumSubtract(counter);
+              }
+            }
+            // Remove the parentheses and their contents
+            if (typeof parenthesisCounter === 'number') {
+                calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1);
+            }
+          }
+        }
+      }      
+    function multiplyDivide(operatorChecker: number): void {
+        const operations = [
+          { symbol: "*", perform: (a: number, b: number) => a * b },
+          { symbol: "/", perform: (a: number, b: number) => a / b },
+        ];
+      
+        for (const operation of operations) {
+          while (
+            calculatorArray[operatorChecker - 1] !== ")" &&
+            calculatorArray[operatorChecker] === operation.symbol &&
+            calculatorArray[operatorChecker + 1] !== "(" &&
+            calculatorArray.includes("(")
+          ) {
+            calculatorArray[operatorChecker - 1] = operation.perform(
+              Number(calculatorArray[operatorChecker - 1]),
+              Number(calculatorArray[operatorChecker + 1])
+            );
+            calculatorArray.splice(operatorChecker, 2);
+          }
+        }
+      
+        for (let i = 0; i < calculatorArray.length; i++) {
+          if (
+            calculatorArray[i - 1] === "(" &&
+            !isNaN(parseFloat(String(calculatorArray[i]))) &&
+            calculatorArray[i + 1] === ")"
+          ) {
+            calculatorArray.splice(i - 1, 1);
+            i--;
+            calculatorArray.splice(i + 1, 1);
+            i--;
+          }
+        }
+      }          
+    // function used to add and subtract in pharenthesis
+    function solveAdditionsAndSubtractionInParenthesis() {
+        while (calculatorArray.includes("(") && calculatorArray.includes(")")) {
+            let finalParenthesis = calculatorArray.lastIndexOf(")");
+            let parenthesisCounter = calculatorArray.lastIndexOf("(", finalParenthesis);
+            let counter = parenthesisCounter + 1;
+            let toLoop = false;
+            for (let i = parenthesisCounter + 1; i < finalParenthesis; i++) {
+                if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
                     toLoop = true;
                     break;
                 }
-                else {
-                    toLoop = false;
-                }
             }
-            if (typeof counter === "number") {
-            while (counter < finalParenthesis) {
-                counter++;
-                // iterate trought the parenthesis
-                for (let i = parenthesisCounter as number; i < finalParenthesis; i++) {
-                    multiplyDivide(operatorChecker as number);
-                }
+            while (toLoop && counter < finalParenthesis) {
+                counter = sumSubtractforaddandsubtract(counter, parenthesisCounter, finalParenthesis);
             }
         }
-        } while (toLoop === true && calculatorArray.includes("(") && calculatorArray.includes(")"));        
     }
-    function multiplyDivide(operatorChecker: number): void {
-        // check if the number is negative
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "*" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) * Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "/" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) / Number(calculatorArray[operatorChecker + 1]);
-
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "*" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) * Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        for (let i = 0; i < calculatorArray.length; i++) {
-            if (calculatorArray[i - 1] === "(" && isNaN(parseFloat(String(calculatorArray[i]))) === false && calculatorArray[i + 1] === ")") {
-                calculatorArray.splice(i - 1, 1);
-                i--;
-                calculatorArray.splice(i + 1, 1);
-                i--;
-            }
-        }
-    }    
-    // function used to add and subtract in pharenthesis
-    function solveAdditionsAndSubtractionInParenthesis() {
-        do {
-            for (let j = calculatorArray.length; j > 0; j--) {
-                if (calculatorArray[j] === ")") {
-                    finalParenthesis = j
-                }
-            }
-            for (let i = 0; i < calculatorArray.length; i++) {
-                if (calculatorArray[i] === "(" && i < finalParenthesis) {
-                    parenthesisCounter = i
-                    counter = parenthesisCounter as number + 1;
-                }
-            }
-            for (let i = parenthesisCounter as number; i < finalParenthesis; i++) {              
-                if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
-                    toLoop = true
-                    break
-                }
-                else {
-                    toLoop = false
-                }
-            }
-            if (typeof counter === "number") {
-            while (counter < finalParenthesis) {
-                counter++
-                // iterate trought the pharenthesis
-                for (let operatorChecker = parenthesisCounter as number + 1; operatorChecker < finalParenthesis; operatorChecker++) {
-                    sumSubtract(operatorChecker)                
-                }
-            }
-        }
-        } while (toLoop === true && calculatorArray.includes("(") && calculatorArray.includes(")"))
-    }
-    function sumSubtract(operatorChecker: number) {
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] < 0 && calculatorArray[operatorChecker - 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) + Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 1)
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "+" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) + Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2)
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "-" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) - Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2)
-        }
-        // check if there is a negative number 
-        
     
+    function sumSubtractforaddandsubtract(operatorChecker: number, parenthesisCounter: number, finalParenthesis: number) {
+        let operator: string | number = "+";
+        let result = 0;
+        for (let i = operatorChecker; i < finalParenthesis; i++) {
+            if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
+                operator = calculatorArray[i];
+            } else {
+                let value = parseInt(calculatorArray[i].toString());
+                if (operator === "+") {
+                    result += value;
+                } else {
+                    result -= value;
+                }
+            }
+        }
+        calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1, result.toString());
+        return parenthesisCounter;
+    }
+    function sumSubtract(operatorIndex: number) {
+        const hasOpenParenthesis = checkForOpenParenthesis();
+        const hasNegativeNumber = checkForNegativeNumber(operatorIndex);
+    
+        if (hasOpenParenthesis && hasNegativeNumber) {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) + Number(calculatorArray[operatorIndex + 1]));
+        } else if (hasOpenParenthesis && calculatorArray[operatorIndex] === "+") {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) + Number(calculatorArray[operatorIndex + 1]));
+        } else if (hasOpenParenthesis && calculatorArray[operatorIndex] === "-") {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) - Number(calculatorArray[operatorIndex + 1]));
+        } else {
+            removeNegativeNumberInParentheses();
+        }
+    }
+    
+    function checkForOpenParenthesis() {
+        return calculatorArray.includes("(");
+    }
+    
+    function checkForNegativeNumber(operatorIndex: number) {
+        const leftOperand = calculatorArray[operatorIndex - 1];
+        const rightOperand = calculatorArray[operatorIndex + 1];
+    
+        return leftOperand !== ")" && rightOperand < 0 && leftOperand !== "(";
+    }
+    
+    function performArithmeticOperation(operatorIndex: number, result: number) {
+        calculatorArray[operatorIndex - 1] = result;
+        calculatorArray.splice(operatorIndex, 2);
+    }
+    
+    function removeNegativeNumberInParentheses() {
         for (let i = 0; i < calculatorArray.length; i++) {
-            if (calculatorArray[i - 1] === "(" && isNaN(parseFloat(calculatorArray[i].toString())) === false && calculatorArray[i + 1] === ")") {
+            if (calculatorArray[i - 1] === "(" && !isNaN(parseFloat(calculatorArray[i].toString())) && calculatorArray[i + 1] === ")") {
                 calculatorArray.splice(i - 1, 1);
                 i--;
                 calculatorArray.splice(i + 1, 1);
                 i--;
-                if (typeof parenthesisCounter === 'number') {
-                    finalParenthesis = parenthesisCounter;
-                    toLoop = false;
-                  } 
             }
-        }                  
-    } 
+        }
+    }
     // solve multiplication and division that are outside of the parenthesis
     function solveMultiplicationAndDivision(calculatorArray: Array<number | string>): void {
         for (let i = 0; i < calculatorArray.length; i++) {
