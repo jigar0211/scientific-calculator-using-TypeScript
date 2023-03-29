@@ -1,56 +1,56 @@
-const calculatorDisplay = document.querySelector(".display-container");
-const numberButtons = Array.from(document.querySelectorAll('.number-button'));
+var calculatorDisplay = document.querySelector(".display-container");
+var numberButtons = document.querySelectorAll('.number-button');
 // numbers
-const zero = document.querySelector("#zero");
-const one = document.getElementById("one");
-const two = document.querySelector("#two");
-const three = document.querySelector("#three");
-const four = document.querySelector("#four");
-const five = document.querySelector("#five");
-const six = document.querySelector("#six");
-const seven = document.querySelector("#seven");
-const height = document.querySelector("#eight");
-const nine = document.querySelector("#nine");
-const pi = document.querySelector('#pi');
-const constantE = document.querySelector('#constantE');
+var zero = document.querySelector("#zero");
+var one = document.getElementById("one");
+var two = document.querySelector("#two");
+var three = document.querySelector("#three");
+var four = document.querySelector("#four");
+var five = document.querySelector("#five");
+var six = document.querySelector("#six");
+var seven = document.querySelector("#seven");
+var height = document.querySelector("#eight");
+var nine = document.querySelector("#nine");
+var pi = document.querySelector('#pi');
+var constantE = document.querySelector('#constantE');
 // operator
-const openParenthesis = document.querySelector("#opened-parenthesis");
-const closedParenthesis = document.querySelector("#closed-parenthesis");
-const eraseAll = document.querySelector("#erase-all-sign");
-const eraseButton = document.querySelector("#erase-button");
-const divideButton = document.querySelector("#split-operator");
-const multiplicationButton = document.querySelector("#multiplication-operator");
-const lessButton = document.querySelector("#less-operator");
-const plusButton = document.querySelector("#plus-operator");
-const decimalButton = document.querySelector("#decimal-operator");
-const equalButton = document.querySelector("#equal-button");
-const moduloButton = document.querySelector('#modulo');
-const exponentButton = document.querySelector('#exponent');
-const plusminusButton = document.querySelector('#plusminus');
-const xsqureButton = document.querySelector("#xsqure");
-const exp = document.querySelector("#exp");
-const squreroot = document.querySelector("#ysqrx");
-const logyxButton = document.querySelector("#logyx");
+var openParenthesis = document.querySelector("#opened-parenthesis");
+var closedParenthesis = document.querySelector("#closed-parenthesis");
+var eraseAll = document.querySelector("#erase-all-sign");
+var eraseButton = document.querySelector("#erase-button");
+var divideButton = document.querySelector("#split-operator");
+var multiplicationButton = document.querySelector("#multiplication-operator");
+var lessButton = document.querySelector("#less-operator");
+var plusButton = document.querySelector("#plus-operator");
+var decimalButton = document.querySelector("#decimal-operator");
+var equalButton = document.querySelector("#equal-button");
+var moduloButton = document.querySelector('#modulo');
+var exponentButton = document.querySelector('#exponent');
+var plusminusButton = document.querySelector('#plusminus');
+var xsqureButton = document.querySelector("#xsqure");
+var exp = document.querySelector("#exp");
+var squreroot = document.querySelector("#ysqrx");
+var logyxButton = document.querySelector("#logyx");
 // calculator array
-let calculatorArray = [];
-let calculatorDomArray = [];
+var calculatorArray = [];
+var calculatorDomArray = [];
 // other variable 
-let degrad = 1; // or false, depending on your needs
-let memory = [];
-let operatorChecker;
-let fe = 1;
-let inv_trigo = 1;
-let hyp_trigo = 1;
-let flag = 1;
-let secondval = true;
-let tempSpan;
-let counter;
-let parenthesisCounter;
-let finalParenthesis;
-let toLoop = false;
+var degrad = 1; // or false, depending on your needs
+var memory = [];
+var operatorChecker;
+var fe = 1;
+var inv_trigo = 1;
+var hyp_trigo = 1;
+var flag = 1;
+var secondval = true;
+var tempSpan;
+var counter;
+var parenthesisCounter;
+var finalParenthesis;
+var toLoop = false;
 // this variable is used to save how many time the user click a number before an operator, that's for the purpose of blocking the user to make numbers larger than 15 digits
-let characterCounter = 0;
-let tempcharacterCounter;
+var characterCounter = 0;
+var tempcharacterCounter;
 eventFunction();
 function eventFunction() {
     // append function
@@ -63,109 +63,109 @@ function eventFunction() {
         calculatorDisplay.append(tempSpan);
     }
     // number event listener
-    numberButtons.forEach((button) => {
-        button.addEventListener('click', () => {
+    numberButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
             if (characterCounter < 16) {
                 characterCounter++;
                 appendNumber(button.value);
             }
         });
     });
-    pi.addEventListener("click", () => {
+    pi.addEventListener("click", function () {
         if (characterCounter < 1) {
             characterCounter++;
             appendNumber(3.14);
         }
     });
-    constantE.addEventListener("click", () => {
+    constantE.addEventListener("click", function () {
         if (characterCounter < 1) {
             characterCounter++;
             appendNumber(2.718281828459045);
         }
     });
     // operator event listener 
-    decimalButton.addEventListener("click", () => {
+    decimalButton.addEventListener("click", function () {
         characterCounter++;
         appendNumber(".");
     });
-    plusButton.addEventListener("click", () => {
+    plusButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("+");
     });
-    lessButton.addEventListener("click", () => {
+    lessButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("-");
     });
-    multiplicationButton.addEventListener("click", () => {
+    multiplicationButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("*");
     });
-    divideButton.addEventListener("click", () => {
+    divideButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("/");
     });
-    moduloButton.addEventListener("click", () => {
+    moduloButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("%");
     });
-    exponentButton.addEventListener("click", () => {
+    exponentButton.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("^");
     });
-    exp.addEventListener("click", () => {
+    exp.addEventListener("click", function () {
         if (characterCounter < 5) {
             characterCounter++;
             appendNumber(".e+");
         }
     });
-    squreroot.addEventListener("click", () => {
+    squreroot.addEventListener("click", function () {
         if (characterCounter < 5) {
             characterCounter++;
             appendNumber("√");
         }
     });
-    logyxButton.addEventListener("click", () => {
+    logyxButton.addEventListener("click", function () {
         if (characterCounter < 5) {
             characterCounter++;
             appendNumber("ylog");
         }
     });
-    openParenthesis.addEventListener("click", () => {
+    openParenthesis.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber("(");
     });
-    closedParenthesis.addEventListener("click", () => {
+    closedParenthesis.addEventListener("click", function () {
         tempcharacterCounter = characterCounter;
         characterCounter = 0;
         appendNumber(")");
     });
     // for 2nd Button Start
-    const secondbutton = document.querySelector("#secondbtn");
-    let flag = 1;
-    secondbutton.addEventListener("click", () => {
-        const firstValues = document.getElementsByClassName('firstvalue');
-        const secondValues = document.getElementsByClassName('secondvalue');
+    var secondbutton = document.querySelector("#secondbtn");
+    var flag = 1;
+    secondbutton.addEventListener("click", function () {
+        var firstValues = document.getElementsByClassName('firstvalue');
+        var secondValues = document.getElementsByClassName('secondvalue');
         if (flag === 1) {
-            for (let i = 0; i < firstValues.length; i++) {
+            for (var i = 0; i < firstValues.length; i++) {
                 firstValues.item(i).style.display = "none";
             }
-            for (let i = 0; i < secondValues.length; i++) {
+            for (var i = 0; i < secondValues.length; i++) {
                 secondValues.item(i).style.display = "inline-block";
             }
             flag = 0;
         }
         else {
-            for (let i = 0; i < secondValues.length; i++) {
+            for (var i = 0; i < secondValues.length; i++) {
                 secondValues.item(i).style.display = "none";
             }
-            for (let i = 0; i < firstValues.length; i++) {
+            for (var i = 0; i < firstValues.length; i++) {
                 firstValues.item(i).style.display = "inline-block";
             }
             flag = 1;
@@ -173,16 +173,16 @@ function eventFunction() {
     });
     // for 2nd Button End 
     // Change Deg to RAD start
-    document.addEventListener('DOMContentLoaded', () => {
-        const degButton = document.querySelector('#deg');
-        degButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var degButton = document.querySelector('#deg');
+        degButton.addEventListener("click", function () {
             if (degrad == 1) {
-                const degElement = document.querySelector('#deg');
+                var degElement = document.querySelector('#deg');
                 degElement.innerHTML = "RAD";
                 degrad = 0;
             }
             else {
-                const degElement = document.querySelector('#deg');
+                var degElement = document.querySelector('#deg');
                 degElement.innerHTML = 'DEG';
                 degrad = 1;
             }
@@ -190,9 +190,9 @@ function eventFunction() {
     });
     // Change Deg to RAD End
     // For F-E Button Start
-    document.addEventListener("DOMContentLoaded", () => {
-        const feButton = document.querySelector("#febtn");
-        feButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var feButton = document.querySelector("#febtn");
+        feButton.addEventListener("click", function () {
             if (fe) {
                 calculatorDisplay.textContent = String(Number(calculatorDisplay.textContent));
                 fe = false;
@@ -205,9 +205,9 @@ function eventFunction() {
     });
     // For F-E Button End
     // Sign Change Button Start
-    document.addEventListener('DOMContentLoaded', () => {
-        const sigchangeButton = document.querySelector("#sigchange");
-        sigchangeButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sigchangeButton = document.querySelector("#sigchange");
+        sigchangeButton.addEventListener("click", function () {
             var _a;
             if (((_a = calculatorDisplay.textContent) === null || _a === void 0 ? void 0 : _a.charAt(0)) === "-") {
                 calculatorDisplay.textContent = calculatorDisplay.textContent.slice(1);
@@ -218,117 +218,117 @@ function eventFunction() {
         });
     });
     // Sign Change Button End
-    document.addEventListener('DOMContentLoaded', () => {
-        const factorialButton = document.querySelector("#factorial");
+    document.addEventListener('DOMContentLoaded', function () {
+        var factorialButton = document.querySelector("#factorial");
         if (factorialButton) {
-            factorialButton.addEventListener("click", () => {
+            factorialButton.addEventListener("click", function () {
                 if (Number(calculatorDisplay.textContent) < 0) {
                     return NaN; // Error: factorial of negative number is undefined
                 }
                 if (calculatorDisplay.textContent === "0" || calculatorDisplay.textContent === "1") {
                     return calculatorDisplay.textContent = "1"; // Base case: factorial of 0 or 1 is 1
                 }
-                let result = 1;
-                for (let i = 2; i <= Number(calculatorDisplay.textContent); i++) {
+                var result = 1;
+                for (var i = 2; i <= Number(calculatorDisplay.textContent); i++) {
                     result *= i;
                 }
                 return calculatorDisplay.textContent = String(result);
             });
         }
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const oneuponxButton = document.querySelector("#oneuponx");
-        oneuponxButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var oneuponxButton = document.querySelector("#oneuponx");
+        oneuponxButton.addEventListener("click", function () {
             calculatorDisplay.textContent = (1 / Number(calculatorDisplay.textContent)).toString();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const lnButton = document.getElementById('ln');
-        lnButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var lnButton = document.getElementById('ln');
+        lnButton.addEventListener("click", function () {
             if (calculatorDisplay.textContent !== null) {
-                let num = Number(calculatorDisplay.textContent);
+                var num = Number(calculatorDisplay.textContent);
                 calculatorDisplay.textContent = String(Math.log(num));
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const logButton = document.getElementById('log');
-        logButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var logButton = document.getElementById('log');
+        logButton.addEventListener("click", function () {
             if (calculatorDisplay.textContent !== null) {
-                const num = Number(calculatorDisplay.textContent);
-                const log10Num = Math.log(num) / Math.log(10);
+                var num = Number(calculatorDisplay.textContent);
+                var log10Num = Math.log(num) / Math.log(10);
                 calculatorDisplay.textContent = String(log10Num);
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const tenrestoxButton = document.getElementById('tenrestox');
-        tenrestoxButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var tenrestoxButton = document.getElementById('tenrestox');
+        tenrestoxButton.addEventListener("click", function () {
             if (calculatorDisplay.textContent !== null) {
-                let num = Number(calculatorDisplay.textContent);
+                var num = Number(calculatorDisplay.textContent);
                 calculatorDisplay.textContent = String(Math.pow(10, num));
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const xsqureButton = document.querySelector('#xsqure');
-        xsqureButton.addEventListener('click', () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var xsqureButton = document.querySelector('#xsqure');
+        xsqureButton.addEventListener('click', function () {
             if (calculatorDisplay.textContent !== null) {
                 calculatorDisplay.textContent = Math.pow(+calculatorDisplay.textContent, 2).toString();
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const xcubeButton = document.querySelector("#xcube");
-        xcubeButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var xcubeButton = document.querySelector("#xcube");
+        xcubeButton.addEventListener("click", function () {
             if (calculatorDisplay.textContent !== null) {
                 calculatorDisplay.textContent = Math.pow(+calculatorDisplay.textContent, 3).toString();
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cbrtButton = document.querySelector("#cbrt");
-        cbrtButton.addEventListener("click", () => {
-            let num = Number(calculatorDisplay.textContent);
+    document.addEventListener('DOMContentLoaded', function () {
+        var cbrtButton = document.querySelector("#cbrt");
+        cbrtButton.addEventListener("click", function () {
+            var num = Number(calculatorDisplay.textContent);
             calculatorDisplay.textContent = String(Math.pow(num, 1 / 3));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const sqrtButton = document.querySelector("#sqrt");
-        sqrtButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sqrtButton = document.querySelector("#sqrt");
+        sqrtButton.addEventListener("click", function () {
             if (calculatorDisplay.textContent !== null) {
-                let num = Number(calculatorDisplay.textContent);
+                var num = Number(calculatorDisplay.textContent);
                 calculatorDisplay.textContent = String(Math.sqrt(num));
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const modxButton = document.querySelector("#modx");
-        modxButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var modxButton = document.querySelector("#modx");
+        modxButton.addEventListener("click", function () {
             var _a;
             if (((_a = calculatorDisplay.textContent) === null || _a === void 0 ? void 0 : _a.charAt(0)) === "-") {
                 calculatorDisplay.textContent = calculatorDisplay.textContent.slice(1);
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const tworesxButton = document.querySelector("#tworesx");
-        tworesxButton.addEventListener("click", () => {
-            let num = Number(calculatorDisplay.textContent);
+    document.addEventListener('DOMContentLoaded', function () {
+        var tworesxButton = document.querySelector("#tworesx");
+        tworesxButton.addEventListener("click", function () {
+            var num = Number(calculatorDisplay.textContent);
             calculatorDisplay.textContent = String(Math.pow(2, num));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const eraisedtoxButtton = document.querySelector("#eraisedtox");
-        eraisedtoxButtton.addEventListener("click", () => {
-            let num = Number(calculatorDisplay.textContent);
+    document.addEventListener('DOMContentLoaded', function () {
+        var eraisedtoxButtton = document.querySelector("#eraisedtox");
+        eraisedtoxButtton.addEventListener("click", function () {
+            var num = Number(calculatorDisplay.textContent);
             calculatorDisplay.textContent = String(Math.pow(2.718281828459045, num));
         });
     });
     // Trigono inverse and trigono hyper change button Start
-    document.addEventListener("DOMContentLoaded", () => {
-        const trignosecondButton = document.querySelector("#trigonosecond");
-        trignosecondButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var trignosecondButton = document.querySelector("#trigonosecond");
+        trignosecondButton.addEventListener("click", function () {
             if (inv_trigo) {
                 inv_trigo = 0;
             }
@@ -338,9 +338,9 @@ function eventFunction() {
             change_trigo_func();
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        const trignohuperButton = document.querySelector("#trigonohyper");
-        trignohuperButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var trignohuperButton = document.querySelector("#trigonohyper");
+        trignohuperButton.addEventListener("click", function () {
             if (hyp_trigo) {
                 hyp_trigo = 0;
             }
@@ -352,52 +352,52 @@ function eventFunction() {
     });
     function change_trigo_func() {
         if (inv_trigo == 0 && hyp_trigo == 1) {
-            const trigoFuncElement = document.getElementById('trigo_func');
+            var trigoFuncElement = document.getElementById('trigo_func');
             trigoFuncElement.style.display = "none";
-            const inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
+            var inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
             inverseTrigoFuncElement.style.display = "flex";
             ;
-            const hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
+            var hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
             hypTrigoFuncElement.style.display = "none";
-            const hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
+            var hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
             hypInverseTrigoFuncElement.style.display = "none";
         }
         else if (inv_trigo == 1 && hyp_trigo == 1) {
-            const trigoFuncElement = document.getElementById('trigo_func');
+            var trigoFuncElement = document.getElementById('trigo_func');
             trigoFuncElement.style.display = "flex";
-            const inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
+            var inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
             inverseTrigoFuncElement.style.display = "none";
-            const hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
+            var hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
             hypTrigoFuncElement.style.display = "none";
-            const hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
+            var hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
             hypInverseTrigoFuncElement.style.display = "none";
         }
         else if (inv_trigo == 0 && hyp_trigo === 0) {
-            const trigoFuncElement = document.getElementById('trigo_func');
+            var trigoFuncElement = document.getElementById('trigo_func');
             trigoFuncElement.style.display = "none";
-            const inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
+            var inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
             inverseTrigoFuncElement.style.display = "none";
-            const hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
+            var hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
             hypTrigoFuncElement.style.display = "none";
-            const hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
+            var hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
             hypInverseTrigoFuncElement.style.display = "flex";
         }
         else {
-            const trigoFuncElement = document.getElementById('trigo_func');
+            var trigoFuncElement = document.getElementById('trigo_func');
             trigoFuncElement.style.display = "none";
-            const inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
+            var inverseTrigoFuncElement = document.getElementById('inverse_trigo_func');
             inverseTrigoFuncElement.style.display = "none";
-            const hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
+            var hypTrigoFuncElement = document.getElementById('hyp_trigo_func');
             hypTrigoFuncElement.style.display = "flex";
-            const hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
+            var hypInverseTrigoFuncElement = document.getElementById('hyp_inverse_trigo_func');
             hypInverseTrigoFuncElement.style.display = "none";
         }
     }
     // Trigono inverse and trigono hyper change button End
     // Trigonometry function start
-    document.addEventListener('DOMContentLoaded', () => {
-        const sinButton = document.querySelector("#sin");
-        sinButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sinButton = document.querySelector("#sin");
+        sinButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.sin((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -406,9 +406,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cosButton = document.querySelector("#cos");
-        cosButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cosButton = document.querySelector("#cos");
+        cosButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.cos((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -417,9 +417,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cotButton = document.querySelector("#cot");
-        cotButton === null || cotButton === void 0 ? void 0 : cotButton.addEventListener('click', () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cotButton = document.querySelector("#cot");
+        cotButton === null || cotButton === void 0 ? void 0 : cotButton.addEventListener('click', function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.tan(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -428,9 +428,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cosecButton = document.querySelector("#csc");
-        cosecButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cosecButton = document.querySelector("#csc");
+        cosecButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.sin(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -439,9 +439,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const secButton = document.querySelector('#sec');
-        secButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var secButton = document.querySelector('#sec');
+        secButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.cos(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -450,9 +450,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const tanButton = document.querySelector("#tan");
-        tanButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var tanButton = document.querySelector("#tan");
+        tanButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.tan((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -462,9 +462,9 @@ function eventFunction() {
         });
     });
     // for Inverse Trigonometry functions Start
-    document.addEventListener('DOMContentLoaded', () => {
-        const sininverseButton = document.querySelector("#insin");
-        sininverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sininverseButton = document.querySelector("#insin");
+        sininverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.asin((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -473,9 +473,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cosinverseButton = document.querySelector("#incos");
-        cosinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cosinverseButton = document.querySelector("#incos");
+        cosinverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.acos((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -484,9 +484,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cotinverseButton = document.querySelector("#incot");
-        cotinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cotinverseButton = document.querySelector("#incot");
+        cotinverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.atan(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -495,9 +495,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        const secinverseButton = document.querySelector("#insec");
-        secinverseButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var secinverseButton = document.querySelector("#insec");
+        secinverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.acos(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -506,9 +506,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cscinverseButton = document.querySelector("#incsc");
-        cscinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cscinverseButton = document.querySelector("#incsc");
+        cscinverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(1 / (Math.asin(Math.PI / 180 * Number(calculatorDisplay.textContent))));
             }
@@ -517,9 +517,9 @@ function eventFunction() {
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const taninverseButton = document.querySelector("#intan");
-        taninverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var taninverseButton = document.querySelector("#intan");
+        taninverseButton.addEventListener("click", function () {
             if (degrad) {
                 calculatorDisplay.textContent = String(Math.atan((Math.PI / 180) * Number(calculatorDisplay.textContent)));
             }
@@ -530,122 +530,122 @@ function eventFunction() {
     });
     // for Inverse Trigonometry functions End
     // for Hyper Trigonometry functions Start
-    document.addEventListener('DOMContentLoaded', () => {
-        const sinhyperButton = document.querySelector("#hsin");
-        sinhyperButton.addEventListener("click", () => {
-            let x = Number(calculatorDisplay.textContent);
-            let result = (Math.exp(x) - Math.exp(-x)) / 2;
+    document.addEventListener('DOMContentLoaded', function () {
+        var sinhyperButton = document.querySelector("#hsin");
+        sinhyperButton.addEventListener("click", function () {
+            var x = Number(calculatorDisplay.textContent);
+            var result = (Math.exp(x) - Math.exp(-x)) / 2;
             calculatorDisplay.textContent = String(result);
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const coshyperButton = document.querySelector("#hcos");
-        coshyperButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var coshyperButton = document.querySelector("#hcos");
+        coshyperButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String((Math.exp(Number(calculatorDisplay.textContent)) + Math.exp(-Number(calculatorDisplay.textContent))) / 2);
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cothyperButton = document.querySelector("#hcot");
-        cothyperButton.addEventListener("click", () => {
-            const input = calculatorDisplay.textContent;
+    document.addEventListener('DOMContentLoaded', function () {
+        var cothyperButton = document.querySelector("#hcot");
+        cothyperButton.addEventListener("click", function () {
+            var input = calculatorDisplay.textContent;
             if (input !== null) {
-                const x = Number(input);
+                var x = Number(input);
                 calculatorDisplay.textContent = String((Math.exp(x) + Math.exp(-x)) / (Math.exp(x) - Math.exp(-x)));
             }
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const sechyperButton = document.querySelector("#hsec");
-        sechyperButton.addEventListener("click", () => {
-            const x = Number(calculatorDisplay.textContent);
-            const cosh = (Math.exp(x) + Math.exp(-x)) / 2;
+    document.addEventListener('DOMContentLoaded', function () {
+        var sechyperButton = document.querySelector("#hsec");
+        sechyperButton.addEventListener("click", function () {
+            var x = Number(calculatorDisplay.textContent);
+            var cosh = (Math.exp(x) + Math.exp(-x)) / 2;
             calculatorDisplay.textContent = String(cosh);
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cschyperButton = document.querySelector("#hcsc");
-        cschyperButton.addEventListener("click", () => {
-            const x = Number(calculatorDisplay.textContent);
-            const sinh = (Math.exp(x) - Math.exp(-x)) / 2;
+    document.addEventListener('DOMContentLoaded', function () {
+        var cschyperButton = document.querySelector("#hcsc");
+        cschyperButton.addEventListener("click", function () {
+            var x = Number(calculatorDisplay.textContent);
+            var sinh = (Math.exp(x) - Math.exp(-x)) / 2;
             calculatorDisplay.textContent = String(sinh);
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const tanhyperButton = document.querySelector("#htan");
-        tanhyperButton.addEventListener("click", () => {
-            const x = Number(calculatorDisplay.textContent);
-            const tanh = (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x));
+    document.addEventListener('DOMContentLoaded', function () {
+        var tanhyperButton = document.querySelector("#htan");
+        tanhyperButton.addEventListener("click", function () {
+            var x = Number(calculatorDisplay.textContent);
+            var tanh = (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x));
             calculatorDisplay.textContent = String(tanh);
         });
     });
     // for Hyper Trigonometry functions End
     // for Hyper Inverse Trigonometry functions Start
-    document.addEventListener('DOMContentLoaded', () => {
-        const sinhyperinverseButton = document.querySelector("#hinsin");
-        sinhyperinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sinhyperinverseButton = document.querySelector("#hinsin");
+        sinhyperinverseButton.addEventListener("click", function () {
             Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) + 1));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const coshyperinverseButton = document.querySelector("#hincos");
-        coshyperinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var coshyperinverseButton = document.querySelector("#hincos");
+        coshyperinverseButton.addEventListener("click", function () {
             Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) - 1));
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        const cothyperinverseButton = document.querySelector("#hincot");
-        cothyperinverseButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var cothyperinverseButton = document.querySelector("#hincot");
+        cothyperinverseButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String(0.5 * Math.log((Number(calculatorDisplay.textContent) + 1) / (Number(calculatorDisplay.textContent) - 1)));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const sechyperinverseButton = document.querySelector("#hinsec");
-        sechyperinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sechyperinverseButton = document.querySelector("#hinsec");
+        sechyperinverseButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String(1 / Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) - 1)));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const cschyperinverseButton = document.querySelector("#hincsc");
-        cschyperinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var cschyperinverseButton = document.querySelector("#hincsc");
+        cschyperinverseButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String(Math.log((1 / Number(calculatorDisplay.textContent)) + Math.sqrt((1 / (Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent))) + 1)));
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const tanhyperinverseButton = document.querySelector("#hintan");
-        tanhyperinverseButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var tanhyperinverseButton = document.querySelector("#hintan");
+        tanhyperinverseButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String(0.5 * Math.log((1 + Number(calculatorDisplay.textContent)) / (1 - Number(calculatorDisplay.textContent))));
         });
     });
     // for Hyper Inverse Trigonometry functions End
     // Trigonometry function End
     // Functions start
-    document.addEventListener('DOMContentLoaded', () => {
-        const ceilButton = document.querySelector("#ceil");
-        ceilButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var ceilButton = document.querySelector("#ceil");
+        ceilButton.addEventListener("click", function () {
             calculatorDisplay.textContent = Math.ceil(Number(calculatorDisplay.textContent)).toString();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const floorButton = document.querySelector("#floor");
-        floorButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var floorButton = document.querySelector("#floor");
+        floorButton.addEventListener("click", function () {
             calculatorDisplay.textContent = Math.floor(Number(calculatorDisplay.textContent)).toString();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const randomButton = document.querySelector("#random");
-        randomButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var randomButton = document.querySelector("#random");
+        randomButton.addEventListener("click", function () {
             calculatorDisplay.textContent = String(Math.random());
         });
     });
     // Function End
-    eraseButton.addEventListener("click", () => {
+    eraseButton.addEventListener("click", function () {
         var _a;
         calculatorDisplay.textContent = "";
         calculatorDomArray.pop();
-        const tempSpan = document.createElement('span');
+        var tempSpan = document.createElement('span');
         tempSpan.classList.add('colored-text');
-        for (let i = 0; i < calculatorDomArray.length; i++) {
-            const currentElement = calculatorDomArray[i];
+        for (var i = 0; i < calculatorDomArray.length; i++) {
+            var currentElement = calculatorDomArray[i];
             if (currentElement instanceof HTMLElement) {
                 tempSpan.append((_a = currentElement.textContent) !== null && _a !== void 0 ? _a : "");
                 calculatorDisplay.append(tempSpan);
@@ -656,16 +656,16 @@ function eventFunction() {
             characterCounter = +tempcharacterCounter;
         }
     });
-    eraseAll.addEventListener("click", () => {
+    eraseAll.addEventListener("click", function () {
         calculatorDisplay.textContent = "";
         calculatorDomArray = [];
         characterCounter = 0;
     });
-    equalButton.addEventListener("click", () => {
+    equalButton.addEventListener("click", function () {
         // all the calculator used function
-        let openParenthesisSign = 0;
-        let openParenthesisCounter = 0;
-        let closedParenthesisCounter = 0;
+        var openParenthesisSign = 0;
+        var openParenthesisCounter = 0;
+        var closedParenthesisCounter = 0;
         calculatorArray = calculatorDisplay.textContent.split("");
         uniteCharacter();
         parseCalculatorArray();
@@ -680,7 +680,7 @@ function eventFunction() {
                 errorhandler();
                 break;
             }
-            for (let i = 0; i < calculatorArray.length; i++) {
+            for (var i = 0; i < calculatorArray.length; i++) {
                 if (calculatorArray[i] === "(") {
                     openParenthesisCounter++;
                     openParenthesisSign = i;
@@ -699,7 +699,7 @@ function eventFunction() {
                 break;
             }
         }
-        while (/[*/+\-%^]/.test(calculatorArray.join("")) || calculatorArray.some((x) => typeof x === "number" && x < 0) || (calculatorArray.length !== 1 && !calculatorArray.every((x) => typeof x === "number"))) {
+        while (/[*/+\-%^]/.test(calculatorArray.join("")) || calculatorArray.some(function (x) { return typeof x === "number" && x < 0; }) || (calculatorArray.length !== 1 && !calculatorArray.every(function (x) { return typeof x === "number"; }))) {
             solveMultiplicationAndDivision(calculatorArray);
             solveAdditionsAndSubtraction(calculatorArray);
             solvedmod();
@@ -709,7 +709,7 @@ function eventFunction() {
         // calculator logic
         // function used to unite into number all the string 
         function uniteCharacter() {
-            let counter = 0;
+            var counter = 0;
             while (calculatorArray[counter + 1] !== undefined) {
                 try {
                     if (isNaN(parseFloat(calculatorArray[counter].toString())) && calculatorArray[counter] !== "-") {
@@ -717,9 +717,9 @@ function eventFunction() {
                     }
                     else if (isNaN(parseFloat(calculatorArray[counter].toString())) === false || calculatorArray[counter] === "-") {
                         if (isNaN(parseFloat(calculatorArray[counter + 1].toString())) === false || calculatorArray[counter + 1] === ".") {
-                            let numberCounter = counter;
+                            var numberCounter = counter;
                             while (isNaN(parseFloat(calculatorArray[numberCounter + 1].toString())) === false || calculatorArray[counter + 1] === ".") {
-                                calculatorArray[numberCounter] = `${calculatorArray[numberCounter]}${calculatorArray[numberCounter + 1]}`;
+                                calculatorArray[numberCounter] = "".concat(calculatorArray[numberCounter]).concat(calculatorArray[numberCounter + 1]);
                                 calculatorArray.splice(numberCounter + 1, 1);
                             }
                         }
@@ -738,7 +738,7 @@ function eventFunction() {
         }
         // function to parse all the string into number
         function parseCalculatorArray() {
-            for (let i = 0; i < calculatorArray.length; i++) {
+            for (var i = 0; i < calculatorArray.length; i++) {
                 if (isNaN(parseFloat(calculatorArray[i].toString())) === false) {
                     calculatorArray[i] = parseFloat(calculatorArray[i].toString());
                 }
@@ -753,13 +753,13 @@ function eventFunction() {
     // function used to solve first all the multiplicatio in parenthesis
     function solveMultiplicationAndDivisionInParenthesis() {
         do {
-            for (let j = calculatorArray.length - 1; j >= 0; j--) {
+            for (var j = calculatorArray.length - 1; j >= 0; j--) {
                 if (calculatorArray[j] === ")") {
                     finalParenthesis = j;
                     break;
                 }
             }
-            for (let i = 0; i < calculatorArray.length; i++) {
+            for (var i = 0; i < calculatorArray.length; i++) {
                 if (calculatorArray[i] === "(" && i < finalParenthesis) {
                     parenthesisCounter = i;
                     if (typeof parenthesisCounter === 'number') {
@@ -767,7 +767,7 @@ function eventFunction() {
                     }
                 }
             }
-            for (let i = parenthesisCounter; i < finalParenthesis; i++) {
+            for (var i = parenthesisCounter; i < finalParenthesis; i++) {
                 if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
                     toLoop = true;
                     break;
@@ -780,7 +780,7 @@ function eventFunction() {
                 while (counter < finalParenthesis) {
                     counter++;
                     // iterate trought the parenthesis
-                    for (let i = parenthesisCounter; i < finalParenthesis; i++) {
+                    for (var i = parenthesisCounter; i < finalParenthesis; i++) {
                         multiplyDivide(operatorChecker);
                     }
                 }
@@ -838,17 +838,18 @@ function eventFunction() {
     //     }
     //   }      
     function multiplyDivide(operatorChecker) {
-        const operations = [
-            { symbol: "*", perform: (a, b) => a * b },
-            { symbol: "/", perform: (a, b) => a / b },
+        var operations = [
+            { symbol: "*", perform: function (a, b) { return a * b; } },
+            { symbol: "/", perform: function (a, b) { return a / b; } },
         ];
-        let i = 0;
+        var i = 0;
         while (i < calculatorArray.length) {
-            const currSymbol = calculatorArray[i];
-            const prevSymbol = calculatorArray[i - 1];
-            const nextSymbol = calculatorArray[i + 1];
+            var currSymbol = calculatorArray[i];
+            var prevSymbol = calculatorArray[i - 1];
+            var nextSymbol = calculatorArray[i + 1];
             if (prevSymbol !== ")" && nextSymbol !== "(") {
-                for (const operation of operations) {
+                for (var _i = 0, operations_1 = operations; _i < operations_1.length; _i++) {
+                    var operation = operations_1[_i];
                     if (currSymbol === operation.symbol) {
                         calculatorArray[i - 1] = operation.perform(Number(calculatorArray[i - 1]), Number(calculatorArray[i + 1]));
                         calculatorArray.splice(i, 2);
@@ -867,28 +868,28 @@ function eventFunction() {
     }
     // function used to add and subtract in pharenthesis
     function solveAdditionsAndSubtractionInParenthesis() {
-        let openParenthesisIndex = calculatorArray.indexOf("(");
-        let closeParenthesisIndex = calculatorArray.lastIndexOf(")");
+        var openParenthesisIndex = calculatorArray.indexOf("(");
+        var closeParenthesisIndex = calculatorArray.lastIndexOf(")");
         while (openParenthesisIndex !== -1 && closeParenthesisIndex !== -1) {
-            let finalParenthesis = closeParenthesisIndex;
-            let parenthesisCounter = -1;
-            for (let i = finalParenthesis - 1; i >= openParenthesisIndex; i--) {
+            var finalParenthesis_1 = closeParenthesisIndex;
+            var parenthesisCounter_1 = -1;
+            for (var i = finalParenthesis_1 - 1; i >= openParenthesisIndex; i--) {
                 if (calculatorArray[i] === "(") {
-                    parenthesisCounter = i;
+                    parenthesisCounter_1 = i;
                     break;
                 }
             }
-            if (parenthesisCounter !== -1) {
-                let counter = parenthesisCounter + 1;
-                let toLoop = false;
-                for (let i = parenthesisCounter + 1; i < finalParenthesis; i++) {
+            if (parenthesisCounter_1 !== -1) {
+                var counter_1 = parenthesisCounter_1 + 1;
+                var toLoop_1 = false;
+                for (var i = parenthesisCounter_1 + 1; i < finalParenthesis_1; i++) {
                     if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
-                        toLoop = true;
+                        toLoop_1 = true;
                         break;
                     }
                 }
-                while (toLoop && counter < finalParenthesis) {
-                    counter = sumSubtractforaddandsubtract(counter, parenthesisCounter, finalParenthesis);
+                while (toLoop_1 && counter_1 < finalParenthesis_1) {
+                    counter_1 = sumSubtractforaddandsubtract(counter_1, parenthesisCounter_1, finalParenthesis_1);
                 }
             }
             openParenthesisIndex = calculatorArray.indexOf("(", openParenthesisIndex + 1);
@@ -896,14 +897,14 @@ function eventFunction() {
         }
     }
     function sumSubtractforaddandsubtract(operatorChecker, parenthesisCounter, finalParenthesis) {
-        let operator = "+";
-        let result = 0;
-        for (let i = operatorChecker; i < finalParenthesis; i++) {
+        var operator = "+";
+        var result = 0;
+        for (var i = operatorChecker; i < finalParenthesis; i++) {
             if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
                 operator = calculatorArray[i];
             }
             else {
-                let value = parseInt(calculatorArray[i].toString());
+                var value = parseInt(calculatorArray[i].toString());
                 if (operator === "+") {
                     result += value;
                 }
@@ -916,8 +917,8 @@ function eventFunction() {
         return parenthesisCounter;
     }
     function sumSubtract(operatorIndex) {
-        const hasOpenParenthesis = checkForOpenParenthesis();
-        const hasNegativeNumber = checkForNegativeNumber(operatorIndex);
+        var hasOpenParenthesis = checkForOpenParenthesis();
+        var hasNegativeNumber = checkForNegativeNumber(operatorIndex);
         if (hasOpenParenthesis && hasNegativeNumber) {
             performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) + Number(calculatorArray[operatorIndex + 1]));
         }
@@ -932,7 +933,7 @@ function eventFunction() {
         }
     }
     function checkForOpenParenthesis() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "(") {
                 return true;
             }
@@ -940,8 +941,8 @@ function eventFunction() {
         return false;
     }
     function checkForNegativeNumber(operatorIndex) {
-        const leftOperand = calculatorArray[operatorIndex - 1];
-        const rightOperand = calculatorArray[operatorIndex + 1];
+        var leftOperand = calculatorArray[operatorIndex - 1];
+        var rightOperand = calculatorArray[operatorIndex + 1];
         return leftOperand !== ")" && rightOperand < 0 && leftOperand !== "(";
     }
     function performArithmeticOperation(operatorIndex, result) {
@@ -949,7 +950,7 @@ function eventFunction() {
         calculatorArray.splice(operatorIndex, 2);
     }
     function removeNegativeNumberInParentheses() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i - 1] === "(" && !isNaN(parseFloat(calculatorArray[i].toString())) && calculatorArray[i + 1] === ")") {
                 calculatorArray.splice(i - 1, 1);
                 i--;
@@ -960,7 +961,7 @@ function eventFunction() {
     }
     // solve multiplication and division that are outside of the parenthesis
     function solveMultiplicationAndDivision(calculatorArray) {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "*") {
                 calculatorArray[i - 1] = calculatorArray[i - 1] * calculatorArray[i + 1];
                 calculatorArray.splice(i, 2);
@@ -979,7 +980,7 @@ function eventFunction() {
     }
     // solve addition and subtraction that are outside of the parenthesis
     function solveAdditionsAndSubtraction(calculatorArray) {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "+") {
                 calculatorArray[i - 1] = calculatorArray[i - 1] + calculatorArray[i + 1];
                 calculatorArray.splice(i, 2);
@@ -991,7 +992,7 @@ function eventFunction() {
         }
     }
     function solvedmod() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "%") {
                 calculatorArray[i - 1] = Number(calculatorArray[i - 1]) % Number(calculatorArray[i + 1]);
                 calculatorArray.splice(i, 2);
@@ -999,7 +1000,7 @@ function eventFunction() {
         }
     }
     function exponent() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "^") {
                 calculatorArray[i - 1] = Math.pow(Number(calculatorArray[i - 1]), Number(calculatorArray[i + 1]));
                 calculatorArray.splice(i, 2);
@@ -1007,54 +1008,54 @@ function eventFunction() {
         }
     }
     function expfunction() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "e") {
                 calculatorArray[i - 1] = Number(calculatorArray[0]) * Math.pow(10, calculatorArray[calculatorArray.length - 1]);
             }
         }
     }
     function squrerootfunction() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "√") {
                 calculatorArray[i - 1] = Math.pow(Number(calculatorArray[calculatorArray.length - 1]), 1 / Number(calculatorArray[0]));
             }
         }
     }
     function logyxfunction() {
-        for (let i = 0; i < calculatorArray.length; i++) {
+        for (var i = 0; i < calculatorArray.length; i++) {
             if (calculatorArray[i] === "y" && calculatorArray[i + 1] === "l" && calculatorArray[i + 2] === "o" && calculatorArray[i + 3] === "g") {
                 calculatorArray[i - 1] = Math.log(Number(calculatorArray[calculatorArray.length - 1])) / Math.log(Number(calculatorArray[0]));
             }
         }
     }
     // For Memory functions
-    document.addEventListener('DOMContentLoaded', () => {
-        const memorysaveButton = document.querySelector('#memorysave');
-        memorysaveButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var memorysaveButton = document.querySelector('#memorysave');
+        memorysaveButton.addEventListener("click", function () {
             memorysave();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const memoryclearButton = document.querySelector('#memoryclear');
-        memoryclearButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var memoryclearButton = document.querySelector('#memoryclear');
+        memoryclearButton.addEventListener("click", function () {
             memoryclear();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const memoryrecallButton = document.querySelector('#memoryrecall');
-        memoryrecallButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var memoryrecallButton = document.querySelector('#memoryrecall');
+        memoryrecallButton.addEventListener("click", function () {
             memoryrecall();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const memoryplusButton = document.querySelector('#memoryplus');
-        memoryplusButton.addEventListener("click", () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        var memoryplusButton = document.querySelector('#memoryplus');
+        memoryplusButton.addEventListener("click", function () {
             memoryplus();
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        const memoryminusButton = document.querySelector('#memoryminus');
-        memoryminusButton.addEventListener("click", () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        var memoryminusButton = document.querySelector('#memoryminus');
+        memoryminusButton.addEventListener("click", function () {
             memoryminus();
         });
     });
@@ -1083,7 +1084,7 @@ function eventFunction() {
     function memorysave() {
         console.log("memory before:", memory);
         enablemcmr();
-        const input = calculatorDisplay.textContent.trim();
+        var input = calculatorDisplay.textContent.trim();
         if (!/^\d+(\.\d+)?$/.test(input)) {
             alert("Enter a number");
         }
@@ -1107,7 +1108,7 @@ function eventFunction() {
     function appendResult() {
         calculatorDisplay.textContent = "";
         calculatorDomArray = [];
-        const tempSpan = document.createElement("span");
+        var tempSpan = document.createElement("span");
         tempSpan.append(calculatorArray[0].toString());
         tempSpan.classList.add('colored-text');
         calculatorDisplay.append(tempSpan);
