@@ -1,18 +1,5 @@
 const calculatorDisplay = document.querySelector(".display-container");
-const numberButtons = Array.from(document.querySelectorAll('.number-button'));
-// numbers
-const zero = document.querySelector("#zero");
-const one = document.getElementById("one");
-const two = document.querySelector("#two");
-const three = document.querySelector("#three");
-const four = document.querySelector("#four");
-const five = document.querySelector("#five");
-const six = document.querySelector("#six");
-const seven = document.querySelector("#seven");
-const height = document.querySelector("#eight");
-const nine = document.querySelector("#nine");
-const pi = document.querySelector('#pi');
-const constantE = document.querySelector('#constantE');
+const numberButtons = document.querySelectorAll('.number-button');
 // operator
 const openParenthesis = document.querySelector("#opened-parenthesis");
 const closedParenthesis = document.querySelector("#closed-parenthesis");
@@ -28,9 +15,6 @@ const moduloButton = document.querySelector('#modulo');
 const exponentButton = document.querySelector('#exponent');
 const plusminusButton = document.querySelector('#plusminus');
 const xsqureButton = document.querySelector("#xsqure");
-const exp = document.querySelector("#exp");
-const squreroot = document.querySelector("#ysqrx");
-const logyxButton = document.querySelector("#logyx");
 // calculator array
 let calculatorArray = [];
 let calculatorDomArray = [];
@@ -71,80 +55,23 @@ function eventFunction() {
             }
         });
     });
-    pi.addEventListener("click", () => {
-        if (characterCounter < 1) {
-            characterCounter++;
-            appendNumber(3.14);
-        }
-    });
-    constantE.addEventListener("click", () => {
-        if (characterCounter < 1) {
-            characterCounter++;
-            appendNumber(2.718281828459045);
-        }
-    });
-    // operator event listener 
-    decimalButton.addEventListener("click", () => {
-        characterCounter++;
-        appendNumber(".");
-    });
-    plusButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("+");
-    });
-    lessButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("-");
-    });
-    multiplicationButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("*");
-    });
-    divideButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("/");
-    });
-    moduloButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("%");
-    });
-    exponentButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("^");
-    });
-    exp.addEventListener("click", () => {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber(".e+");
-        }
-    });
-    squreroot.addEventListener("click", () => {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber("√");
-        }
-    });
-    logyxButton.addEventListener("click", () => {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber("ylog");
-        }
-    });
-    openParenthesis.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("(");
-    });
-    closedParenthesis.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber(")");
+    const buttons = [
+        { element: decimalButton, value: "." },
+        { element: plusButton, value: "+" },
+        { element: lessButton, value: "-" },
+        { element: multiplicationButton, value: "*" },
+        { element: divideButton, value: "/" },
+        { element: moduloButton, value: "%" },
+        { element: exponentButton, value: "^" },
+        { element: openParenthesis, value: "(" },
+        { element: closedParenthesis, value: ")" },
+    ];
+    buttons.forEach((button) => {
+        button.element.addEventListener("click", () => {
+            tempcharacterCounter = characterCounter;
+            characterCounter = 0;
+            appendNumber(button.value);
+        });
     });
     // for 2nd Button Start
     const secondbutton = document.querySelector("#secondbtn");
