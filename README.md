@@ -6,6 +6,38 @@
 - [ Click Here to Preview The Calculator](https://subtle-lollipop-1c4694.netlify.app/)
 ## ![icons8-about-28](https://user-images.githubusercontent.com/122254160/227203854-e55cdbbb-e495-4082-8c62-88f479c45330.png) **What is typescript**
 - **💻 TypeScript is a programming language developed by Microsoft 🚀 that is a typed superset of JavaScript 🌐. It offers features such as static typing 🙅‍♂️, interfaces 🤝, classes 🏫, modules 📦, and decorators 🎀, making it easier to write and maintain large-scale applications. TypeScript code is transpiled to JavaScript code 🔄 and can run in any JavaScript environment 🌍, including web browsers 🌐 and Node.js 🚀. It has excellent tooling support 🛠️ and is a popular choice for building complex applications 🏗️.**
+## ![icons8-installing-updates-22](https://user-images.githubusercontent.com/122254160/225263873-cf5e8900-8799-415d-b235-5c07c416f58f.png) **Complete Inilizatoin Of TypeScript** 
+#### Step 1 : install Ts in your IDE
+```
+npm install -g typescript
+```
+> Write this command in yout IDE's Terminal
+#### Step 2 : Create src and build folder for your project
+![Screenshot from 2023-03-15 14-57-16](https://user-images.githubusercontent.com/122254160/225266911-d3885509-9ed2-411f-a485-4e414ea972cf.png)
+#### Step 3 :  Put all the html and js file inside the build folder & all the typescript file will be at the src folder
+![Screenshot from 2023-03-15 15-02-17](https://user-images.githubusercontent.com/122254160/225267732-172a9f90-e71a-40cc-8c60-cd139e29de5e.png)
+#### Step 4 :  Create a config file Using this command 
+``` 
+tsc --init
+```
+> it will create **tsconfig.json** file
+
+#### Step 5 :  Modify mantioned code in ```tsconfig.json``` 
+```
+"rootDir": "./initializeTS/src", // here you give your src folder path
+"outDir": "./initializeTS/build/js", // Here you give your jsvascript file path and 'build/js' will create js folder inside the build folder
+
+// Add this line of code at the end of the tsconfig.json file
+,
+  "include": [
+    "initializeTS/src"
+  ]
+```
+#### Step 5 :  run this command after make changes in json file it will update all the changes of that are maked in json file.
+```
+tsc -w 
+```
+
 ## ![icons8-source-code-28](https://user-images.githubusercontent.com/122254160/227211977-c2262cad-e1be-44b7-901b-b3983010440a.png) **Some Use-cases Of Typescript In This Project**
 - **The TypeScript approach used in this code is to add `optional type annotations` to variables, parameters, and return types. This allows the compiler to catch type-related errors at compile time instead of runtime, which can help prevent bugs and improve the reliability of the code.**
 
