@@ -1,17 +1,5 @@
 const calculatorDisplay = document.querySelector(".display-container")! as HTMLDivElement;
-// numbers
-const zero = document.querySelector("#zero") as HTMLButtonElement
-const one: HTMLButtonElement = document.getElementById("one")! as HTMLButtonElement;
-const two = document.querySelector("#two") as HTMLButtonElement
-const three = document.querySelector("#three") as HTMLButtonElement
-const four = document.querySelector("#four") as HTMLButtonElement
-const five = document.querySelector("#five") as HTMLButtonElement
-const six = document.querySelector("#six") as HTMLButtonElement
-const seven = document.querySelector("#seven") as HTMLButtonElement
-const height = document.querySelector("#eight") as HTMLButtonElement
-const nine = document.querySelector("#nine") as HTMLButtonElement
-const pi = document.querySelector('#pi') as HTMLButtonElement
-const constantE = document.querySelector('#constantE') as HTMLButtonElement
+const numberButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.number-button');
 // operator
 const openParenthesis = document.querySelector("#opened-parenthesis") as HTMLButtonElement
 const closedParenthesis = document.querySelector("#closed-parenthesis") as HTMLButtonElement
@@ -27,9 +15,6 @@ const moduloButton = document.querySelector('#modulo') as HTMLButtonElement
 const exponentButton = document.querySelector('#exponent') as HTMLButtonElement
 const plusminusButton = document.querySelector('#plusminus') as HTMLButtonElement
 const xsqureButton = document.querySelector("#xsqure") as HTMLButtonElement
-const exp = document.querySelector("#exp") as HTMLButtonElement
-const squreroot = document.querySelector("#ysqrx") as HTMLButtonElement
-const logyxButton = document.querySelector("#logyx") as HTMLButtonElement
 // calculator array
 let calculatorArray: (string | number)[] = [];
 let calculatorDomArray: (HTMLElement | string | number)[] = [];
@@ -64,141 +49,38 @@ function eventFunction() {
     }
 
     // number event listener
-    one.addEventListener("click", () => {
-        if (characterCounter < 16) {
+    numberButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          if (characterCounter < 16) {
             characterCounter++;
-            appendNumber(1);
-        }
-    });
-    two.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(2)
-        }
-    })
-    three.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(3)
-        }
-    })
-    four.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(4)
-        }
-    })
-    five.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(5)
-        }
-    })
-    six.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(6)
-        }
-    })
-    seven.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(7)
-        }
-    })
-    height.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(8)
-        }
-    })
-    nine.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(9)
-        }
-    })
-    zero.addEventListener("click", () => {
-        if (characterCounter < 16) {
-            characterCounter++
-            appendNumber(0)
-        }
-    })
-    pi.addEventListener("click", () => {
-        if(characterCounter < 1) {
-            characterCounter++
-            appendNumber(3.14)
-        }
-    })
-    constantE.addEventListener("click", () => {
-        if(characterCounter < 1) {
-            characterCounter++
-            appendNumber(2.718281828459045)
-        }
-    })
+            appendNumber(button.value);
+          }
+        });
+      });
     // operator event listener 
-    decimalButton.addEventListener("click", () => {
-        characterCounter++
-        appendNumber(".")
-    })
-    plusButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("+")
-    })
-    lessButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("-")
-    })
-    multiplicationButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("*")
-    })
-    divideButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("/")
-    })
-    moduloButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("%")
-    })
-    exponentButton.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("^")
-    })
-    exp.addEventListener("click", () => {
-        if(characterCounter < 5){
-            characterCounter++ 
-            appendNumber(".e+")
-        }
-    })
-    squreroot.addEventListener("click", () => {
-        if(characterCounter < 5){
-            characterCounter++ 
-            appendNumber("√")
-        }
-    })
-    logyxButton.addEventListener("click", () => {
-        if(characterCounter < 5){
-            characterCounter++ 
-            appendNumber("ylog")
-        }
-    })
-    openParenthesis.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber("(")
-    })
-    closedParenthesis.addEventListener("click", () => {
-        tempcharacterCounter = characterCounter
-        characterCounter = 0
-        appendNumber(")")
-    })
+    interface Button {
+        element: HTMLButtonElement;
+        value: string;
+      }
+      const buttons: Button[] = [
+        {element: decimalButton, value: "."},
+        {element: plusButton, value: "+"},
+        {element: lessButton, value: "-"},
+        {element: multiplicationButton, value: "*"},
+        {element: divideButton, value: "/"},
+        {element: moduloButton, value: "%"},
+        {element: exponentButton, value: "^"},
+        {element: openParenthesis, value: "("},
+        {element: closedParenthesis, value: ")"},
+      ];
+      
+      buttons.forEach((button: Button) => {
+        button.element.addEventListener("click", () => {
+          tempcharacterCounter = characterCounter;
+          characterCounter = 0;
+          appendNumber(button.value);
+        });
+      });
     // for 2nd Button Start
     const secondbutton = document.querySelector<HTMLButtonElement>("#secondbtn")!;
     let flag = 1;
@@ -795,61 +677,98 @@ function eventFunction() {
     }
     // function used to solve first all the multiplicatio in parenthesis
     function solveMultiplicationAndDivisionInParenthesis() {
-        let finalParenthesis: number = 0;
-      
-        let hasOpenParenthesis = false;
-        let hasClosedParenthesis = false;
-
-        for (let i = 0; i < calculatorArray.length; i++) {
-        if (calculatorArray[i] === "(") {
-            hasOpenParenthesis = true;
-        }
-        if (calculatorArray[i] === ")") {
-            hasClosedParenthesis = true;
-        }
-        }
-
-        if (hasOpenParenthesis && hasClosedParenthesis) {
-            // Find the innermost pair of parentheses
+        do {
             for (let j = calculatorArray.length - 1; j >= 0; j--) {
                 if (calculatorArray[j] === ")") {
-                finalParenthesis = j;
-                break;
+                    finalParenthesis = j;
+                    break;
                 }
             }
-            let parenthesisCounter: number | undefined;
-            let counter: number | undefined;
-        
             for (let i = 0; i < calculatorArray.length; i++) {
                 if (calculatorArray[i] === "(" && i < finalParenthesis) {
-                parenthesisCounter = i;
-                counter = parenthesisCounter + 1;
+                    parenthesisCounter = i;
+                    if (typeof parenthesisCounter === 'number') {
+                        counter = parenthesisCounter + 1;
+                      }
                 }
             }
-        
-            if (typeof counter === "number") {
-                let toLoop: boolean = true;
-                while (toLoop === true && counter < finalParenthesis) {
-                toLoop = false;
-                for (let i = counter; i < finalParenthesis; i++) {
-                    if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
+            for (let i: number = <number>parenthesisCounter; i < finalParenthesis; i++) {
+                if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
                     toLoop = true;
                     break;
-                    }
                 }
-                if (toLoop === true) {
-                    multiplyDivide(counter);
-                    sumSubtract(counter);
+                else {
+                    toLoop = false;
                 }
-                }
-                // Remove the parentheses and their contents
-                if (typeof parenthesisCounter === 'number') {
-                    calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1);
+            }
+            if (typeof counter === "number") {
+            while (counter < finalParenthesis) {
+                counter++;
+                // iterate trought the parenthesis
+                for (let i = parenthesisCounter as number; i < finalParenthesis; i++) {
+                    multiplyDivide(operatorChecker as number);
                 }
             }
         }
         
-      }      
+        } while (toLoop === true && /\(|\)/.test(calculatorArray.join('')));      
+    }
+    // function solveMultiplicationAndDivisionInParenthesis() {
+    //     let finalParenthesis: number = 0;
+      
+    //     let hasOpenParenthesis = false;
+    //     let hasClosedParenthesis = false;
+
+    //     for (let i = 0; i < calculatorArray.length; i++) {
+    //     if (calculatorArray[i] === "(") {
+    //         hasOpenParenthesis = true;
+    //     }
+    //     if (calculatorArray[i] === ")") {
+    //         hasClosedParenthesis = true;
+    //     }
+    //     }
+
+    //     if (hasOpenParenthesis && hasClosedParenthesis) {
+    //         // Find the innermost pair of parentheses
+    //         for (let j = calculatorArray.length - 1; j >= 0; j--) {
+    //             if (calculatorArray[j] === ")") {
+    //             finalParenthesis = j;
+    //             break;
+    //             }
+    //         }
+    //         let parenthesisCounter: number | undefined;
+    //         let counter: number | undefined;
+        
+    //         for (let i = 0; i < calculatorArray.length; i++) {
+    //             if (calculatorArray[i] === "(" && i < finalParenthesis) {
+    //             parenthesisCounter = i;
+    //             counter = parenthesisCounter + 1;
+    //             }
+    //         }
+        
+    //         if (typeof counter === "number") {
+    //             let toLoop: boolean = true;
+    //             while (toLoop === true && counter < finalParenthesis) {
+    //             toLoop = false;
+    //             for (let i = counter; i < finalParenthesis; i++) {
+    //                 if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
+    //                 toLoop = true;
+    //                 break;
+    //                 }
+    //             }
+    //             if (toLoop === true) {
+    //                 multiplyDivide(counter);
+    //                 sumSubtract(counter);
+    //             }
+    //             }
+    //             // Remove the parentheses and their contents
+    //             if (typeof parenthesisCounter === 'number') {
+    //                 calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1);
+    //             }
+    //         }
+    //     }
+        
+    //   }      
       function multiplyDivide(operatorChecker: number): void {
         const operations = [
           { symbol: "*", perform: (a: number, b: number) => a * b },
