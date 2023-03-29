@@ -200,26 +200,35 @@ function eventFunction() {
         appendNumber(")")
     })
     // for 2nd Button Start
-    const secondbutton = document.querySelector<HTMLButtonElement>("#secondbtn")!
-    secondbutton.addEventListener("click",() => {
-        if (flag == 1) {
-            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
-              (element as HTMLElement).style.display = "none";
-            }
-            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
-              (element as HTMLElement).style.display = "inline-block";
-            }
-            flag = 0;
-          } else {
-            for (let element of Array.from(document.getElementsByClassName('secondvalue'))) {
-              (element as HTMLElement).style.display = "none";
-            }
-            for (let element of Array.from(document.getElementsByClassName('firstvalue'))) {
-              (element as HTMLElement).style.display = "inline-block";
-            }
-            flag = 1;
-          }
-    })
+    const secondbutton = document.querySelector<HTMLButtonElement>("#secondbtn")!;
+    let flag = 1;
+
+    secondbutton.addEventListener("click", () => {
+    const firstValues = document.getElementsByClassName('firstvalue');
+    const secondValues = document.getElementsByClassName('secondvalue');
+    
+    if (flag === 1) {
+        for (let i = 0; i < firstValues.length; i++) {
+        (firstValues.item(i) as HTMLElement).style.display = "none";
+        }
+        
+        for (let i = 0; i < secondValues.length; i++) {
+        (secondValues.item(i) as HTMLElement).style.display = "inline-block";
+        }
+        
+        flag = 0;
+    } else {
+        for (let i = 0; i < secondValues.length; i++) {
+        (secondValues.item(i) as HTMLElement).style.display = "none";
+        }
+        
+        for (let i = 0; i < firstValues.length; i++) {
+        (firstValues.item(i) as HTMLElement).style.display = "inline-block";
+        }
+        
+        flag = 1;
+    }
+    });
     // for 2nd Button End 
     // Change Deg to RAD start
     document.addEventListener('DOMContentLoaded', () => {
@@ -302,8 +311,9 @@ function eventFunction() {
         const logButton = document.getElementById('log') as HTMLButtonElement
         logButton.addEventListener("click", () => {
             if(calculatorDisplay.textContent !== null){
-                let num = Number(calculatorDisplay.textContent);
-                calculatorDisplay.textContent = String(Math.log10(num))
+                const num = Number(calculatorDisplay.textContent);
+                const log10Num = Math.log(num) / Math.log(10);
+                calculatorDisplay.textContent = String(log10Num);
             }
         })
     })
@@ -335,8 +345,8 @@ function eventFunction() {
     document.addEventListener('DOMContentLoaded', () => {
         const cbrtButton = document.querySelector<HTMLButtonElement>("#cbrt")!; 
         cbrtButton.addEventListener("click", () => {
-            let num = Number(calculatorDisplay.textContent)
-            calculatorDisplay.textContent = String(Math.cbrt(num));
+            let num = Number(calculatorDisplay.textContent);
+            calculatorDisplay.textContent = String(Math.pow(num, 1/3));            
         });
     });
     document.addEventListener('DOMContentLoaded', () => {
@@ -567,37 +577,49 @@ function eventFunction() {
     document.addEventListener('DOMContentLoaded', () => {
         const sinhyperButton = document.querySelector<HTMLButtonElement>("#hsin")!  
         sinhyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(Math.sinh(Number(calculatorDisplay.textContent)));
+            let x = Number(calculatorDisplay.textContent);
+            let result = (Math.exp(x) - Math.exp(-x)) / 2;
+            calculatorDisplay.textContent = String(result);
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const coshyperButton = document.querySelector<HTMLButtonElement>("#hcos")! 
         coshyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(Math.cosh(Number(calculatorDisplay.textContent)));
+            calculatorDisplay.textContent = String((Math.exp(Number(calculatorDisplay.textContent)) + Math.exp(-Number(calculatorDisplay.textContent))) / 2);
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const cothyperButton = document.querySelector<HTMLButtonElement>("#hcot")!
         cothyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(1/Math.tanh(Number(calculatorDisplay.textContent)));
+            const input = calculatorDisplay.textContent;
+            if (input !== null) {
+              const x = Number(input);
+              calculatorDisplay.textContent = String((Math.exp(x) + Math.exp(-x)) / (Math.exp(x) - Math.exp(-x)));
+            }          
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const sechyperButton = document.querySelector<HTMLButtonElement>("#hsec")!
         sechyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(1/Math.cosh(Number(calculatorDisplay.textContent)));
+            const x = Number(calculatorDisplay.textContent);
+            const cosh = (Math.exp(x) + Math.exp(-x)) / 2;
+            calculatorDisplay.textContent = String(cosh);
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const cschyperButton = document.querySelector<HTMLButtonElement>("#hcsc")!
         cschyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(1/Math.sinh(Number(calculatorDisplay.textContent)));
+            const x = Number(calculatorDisplay.textContent);
+            const sinh = (Math.exp(x) - Math.exp(-x)) / 2;
+            calculatorDisplay.textContent = String(sinh);            
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const tanhyperButton = document.querySelector<HTMLButtonElement>("#htan")!
         tanhyperButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(Math.tanh(Number(calculatorDisplay.textContent)));
+            const x = Number(calculatorDisplay.textContent);
+            const tanh = (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x));
+            calculatorDisplay.textContent = String(tanh);
         })
     })
     // for Hyper Trigonometry functions End
@@ -605,13 +627,13 @@ function eventFunction() {
     document.addEventListener('DOMContentLoaded', () => {
         const sinhyperinverseButton = document.querySelector<HTMLButtonElement>("#hinsin")!
         sinhyperinverseButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(Math.asinh(Number(calculatorDisplay.textContent)));
+            Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) + 1));
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
         const coshyperinverseButton = document.querySelector<HTMLButtonElement>("#hincos")!
         coshyperinverseButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(Math.acosh(Number(calculatorDisplay.textContent)));
+            Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) - 1));
         })
     })
     document.addEventListener("DOMContentLoaded", () => {
@@ -623,7 +645,7 @@ function eventFunction() {
     document.addEventListener('DOMContentLoaded', () => {
         const sechyperinverseButton = document.querySelector<HTMLButtonElement>("#hinsec")!
         sechyperinverseButton.addEventListener("click", () => {
-            calculatorDisplay.textContent = String(1/Math.acosh(Number(calculatorDisplay.textContent)));
+            calculatorDisplay.textContent = String(1/Math.log(Number(calculatorDisplay.textContent) + Math.sqrt((Number(calculatorDisplay.textContent) * Number(calculatorDisplay.textContent)) - 1)));
         })
     })
     document.addEventListener('DOMContentLoaded', () => {
@@ -695,16 +717,15 @@ function eventFunction() {
         expfunction()
         squrerootfunction()
         logyxfunction()
-        while(calculatorArray.includes("(") || calculatorArray.includes(")")) {
+        while (/[\(\)]/.test(calculatorArray.join(""))) {
             solveMultiplicationAndDivisionInParenthesis()
             solveAdditionsAndSubtractionInParenthesis()
         
             // crash preventing
-            if (calculatorArray.includes(NaN)) {
+            while (/NaN/.test(calculatorArray.toString())) {
                 errorhandler()
                 break
             }
-        
             for (let i = 0; i < calculatorArray.length; i++) {
                 if (calculatorArray[i] === "(") {
                     openParenthesisCounter++
@@ -724,7 +745,7 @@ function eventFunction() {
                 break
             }        
         }         
-        while(calculatorArray.includes("*") || calculatorArray.includes("/") || calculatorArray.includes("+") || calculatorArray.includes("-")|| calculatorArray.includes("%") || calculatorArray.includes("^") || calculatorArray.some(x => x < 0) && calculatorArray.length !== 1) {
+        while (/[*/+\-%^]/.test(calculatorArray.join("")) || calculatorArray.some((x) => typeof x === "number" && x < 0) || (calculatorArray.length !== 1 && !calculatorArray.every((x) => typeof x === "number"))) {
             solveMultiplicationAndDivision(calculatorArray)
             solveAdditionsAndSubtraction(calculatorArray)
             solvedmod()
@@ -756,7 +777,7 @@ function eventFunction() {
                 }
             }
             console.log(calculatorArray);
-            calculatorArray[calculatorArray.length - 1] = (calculatorArray[calculatorArray.length - 1] as string).replaceAll('undefined', '');
+            calculatorArray[calculatorArray.length - 1] = (calculatorArray[calculatorArray.length - 1] as string).replace('undefined', '');
         }        
         // function to parse all the string into number
         function parseCalculatorArray() {
@@ -774,128 +795,188 @@ function eventFunction() {
     }
     // function used to solve first all the multiplicatio in parenthesis
     function solveMultiplicationAndDivisionInParenthesis() {
-        do {
+        let finalParenthesis: number = 0;
+      
+        let hasOpenParenthesis = false;
+        let hasClosedParenthesis = false;
+
+        for (let i = 0; i < calculatorArray.length; i++) {
+        if (calculatorArray[i] === "(") {
+            hasOpenParenthesis = true;
+        }
+        if (calculatorArray[i] === ")") {
+            hasClosedParenthesis = true;
+        }
+        }
+
+        if (hasOpenParenthesis && hasClosedParenthesis) {
+            // Find the innermost pair of parentheses
             for (let j = calculatorArray.length - 1; j >= 0; j--) {
                 if (calculatorArray[j] === ")") {
-                    finalParenthesis = j;
-                    break;
+                finalParenthesis = j;
+                break;
                 }
             }
+            let parenthesisCounter: number | undefined;
+            let counter: number | undefined;
+        
             for (let i = 0; i < calculatorArray.length; i++) {
                 if (calculatorArray[i] === "(" && i < finalParenthesis) {
-                    parenthesisCounter = i;
-                    if (typeof parenthesisCounter === 'number') {
-                        counter = parenthesisCounter + 1;
-                      }
+                parenthesisCounter = i;
+                counter = parenthesisCounter + 1;
                 }
             }
-            for (let i: number = <number>parenthesisCounter; i < finalParenthesis; i++) {
-                if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
+        
+            if (typeof counter === "number") {
+                let toLoop: boolean = true;
+                while (toLoop === true && counter < finalParenthesis) {
+                toLoop = false;
+                for (let i = counter; i < finalParenthesis; i++) {
+                    if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
                     toLoop = true;
                     break;
+                    }
                 }
-                else {
-                    toLoop = false;
+                if (toLoop === true) {
+                    multiplyDivide(counter);
+                    sumSubtract(counter);
+                }
+                }
+                // Remove the parentheses and their contents
+                if (typeof parenthesisCounter === 'number') {
+                    calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1);
                 }
             }
-            if (typeof counter === "number") {
-            while (counter < finalParenthesis) {
-                counter++;
-                // iterate trought the parenthesis
-                for (let i = parenthesisCounter as number; i < finalParenthesis; i++) {
-                    multiplyDivide(operatorChecker as number);
-                }
-            }
         }
-        } while (toLoop === true && calculatorArray.includes("(") && calculatorArray.includes(")"));        
-    }
-    function multiplyDivide(operatorChecker: number): void {
-        // check if the number is negative
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "*" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) * Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "/" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) / Number(calculatorArray[operatorChecker + 1]);
-
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "*" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) * Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2);
-        }
-        for (let i = 0; i < calculatorArray.length; i++) {
-            if (calculatorArray[i - 1] === "(" && isNaN(parseFloat(String(calculatorArray[i]))) === false && calculatorArray[i + 1] === ")") {
-                calculatorArray.splice(i - 1, 1);
+        
+      }      
+      function multiplyDivide(operatorChecker: number): void {
+        const operations = [
+          { symbol: "*", perform: (a: number, b: number) => a * b },
+          { symbol: "/", perform: (a: number, b: number) => a / b },
+        ];
+      
+        let i = 0;
+        while (i < calculatorArray.length) {
+          const currSymbol = calculatorArray[i];
+          const prevSymbol = calculatorArray[i - 1];
+          const nextSymbol = calculatorArray[i + 1];
+      
+          if (prevSymbol !== ")" && nextSymbol !== "(") {
+            for (const operation of operations) {
+              if (currSymbol === operation.symbol) {
+                calculatorArray[i - 1] = operation.perform(
+                  Number(calculatorArray[i - 1]),
+                  Number(calculatorArray[i + 1])
+                );
+                calculatorArray.splice(i, 2);
                 i--;
-                calculatorArray.splice(i + 1, 1);
-                i--;
+              }
             }
+          }
+          if (i >= 0 && calculatorArray[i - 1] === "(" && !isNaN(parseFloat(String(currSymbol))) && nextSymbol === ")") {
+            calculatorArray.splice(i - 1, 1);
+            i--;
+            calculatorArray.splice(i + 1, 1);
+            i--;
+          }
+          i++;
         }
-    }    
+      }               
     // function used to add and subtract in pharenthesis
     function solveAdditionsAndSubtractionInParenthesis() {
-        do {
-            for (let j = calculatorArray.length; j > 0; j--) {
-                if (calculatorArray[j] === ")") {
-                    finalParenthesis = j
-                }
-            }
-            for (let i = 0; i < calculatorArray.length; i++) {
-                if (calculatorArray[i] === "(" && i < finalParenthesis) {
-                    parenthesisCounter = i
-                    counter = parenthesisCounter as number + 1;
-                }
-            }
-            for (let i = parenthesisCounter as number; i < finalParenthesis; i++) {              
-                if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
-                    toLoop = true
-                    break
-                }
-                else {
-                    toLoop = false
-                }
-            }
-            if (typeof counter === "number") {
-            while (counter < finalParenthesis) {
-                counter++
-                // iterate trought the pharenthesis
-                for (let operatorChecker = parenthesisCounter as number + 1; operatorChecker < finalParenthesis; operatorChecker++) {
-                    sumSubtract(operatorChecker)                
-                }
+        let openParenthesisIndex = calculatorArray.indexOf("(");
+        let closeParenthesisIndex = calculatorArray.lastIndexOf(")");
+
+        while (openParenthesisIndex !== -1 && closeParenthesisIndex !== -1) {
+        let finalParenthesis = closeParenthesisIndex;
+        let parenthesisCounter = -1;
+        for (let i = finalParenthesis - 1; i >= openParenthesisIndex; i--) {
+            if (calculatorArray[i] === "(") {
+            parenthesisCounter = i;
+            break;
             }
         }
-        } while (toLoop === true && calculatorArray.includes("(") && calculatorArray.includes(")"))
+        if (parenthesisCounter !== -1) {
+            let counter = parenthesisCounter + 1;
+            let toLoop = false;
+            for (let i = parenthesisCounter + 1; i < finalParenthesis; i++) {
+            if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
+                toLoop = true;
+                break;
+            }
+            }
+            while (toLoop && counter < finalParenthesis) {
+            counter = sumSubtractforaddandsubtract(counter, parenthesisCounter, finalParenthesis);
+            }
+        }
+        openParenthesisIndex = calculatorArray.indexOf("(", openParenthesisIndex + 1);
+        closeParenthesisIndex = calculatorArray.lastIndexOf(")", closeParenthesisIndex - 1);
+        }
+
     }
-    function sumSubtract(operatorChecker: number) {
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] < 0 && calculatorArray[operatorChecker - 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) + Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 1)
+    function sumSubtractforaddandsubtract(operatorChecker: number, parenthesisCounter: number, finalParenthesis: number) {
+        let operator: string | number = "+";
+        let result = 0;
+        for (let i = operatorChecker; i < finalParenthesis; i++) {
+            if (calculatorArray[i] === "+" || calculatorArray[i] === "-") {
+                operator = calculatorArray[i];
+            } else {
+                let value = parseInt(calculatorArray[i].toString());
+                if (operator === "+") {
+                    result += value;
+                } else {
+                    result -= value;
+                }
+            }
         }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "+" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) + Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2)
-        }
-        while (calculatorArray[operatorChecker - 1] !== ")" && calculatorArray[operatorChecker] === "-" && calculatorArray[operatorChecker + 1] !== "(" && calculatorArray.includes("(")) {
-            calculatorArray[operatorChecker - 1] = Number(calculatorArray[operatorChecker - 1]) - Number(calculatorArray[operatorChecker + 1]);
-            calculatorArray.splice(operatorChecker, 2)
-        }
-        // check if there is a negative number 
-        
+        calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1, result.toString());
+        return parenthesisCounter;
+    }
+    function sumSubtract(operatorIndex: number) {
+        const hasOpenParenthesis = checkForOpenParenthesis();
+        const hasNegativeNumber = checkForNegativeNumber(operatorIndex);
     
+        if (hasOpenParenthesis && hasNegativeNumber) {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) + Number(calculatorArray[operatorIndex + 1]));
+        } else if (hasOpenParenthesis && calculatorArray[operatorIndex] === "+") {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) + Number(calculatorArray[operatorIndex + 1]));
+        } else if (hasOpenParenthesis && calculatorArray[operatorIndex] === "-") {
+            performArithmeticOperation(operatorIndex, Number(calculatorArray[operatorIndex - 1]) - Number(calculatorArray[operatorIndex + 1]));
+        } else {
+            removeNegativeNumberInParentheses();
+        }
+    }
+    function checkForOpenParenthesis(): boolean {
         for (let i = 0; i < calculatorArray.length; i++) {
-            if (calculatorArray[i - 1] === "(" && isNaN(parseFloat(calculatorArray[i].toString())) === false && calculatorArray[i + 1] === ")") {
+          if (calculatorArray[i] === "(") {
+            return true;
+          }
+        }
+        return false;
+      }
+    function checkForNegativeNumber(operatorIndex: number) {
+        const leftOperand = calculatorArray[operatorIndex - 1];
+        const rightOperand = calculatorArray[operatorIndex + 1];
+    
+        return leftOperand !== ")" && rightOperand < 0 && leftOperand !== "(";
+    }
+    
+    function performArithmeticOperation(operatorIndex: number, result: number) {
+        calculatorArray[operatorIndex - 1] = result;
+        calculatorArray.splice(operatorIndex, 2);
+    }
+    
+    function removeNegativeNumberInParentheses() {
+        for (let i = 0; i < calculatorArray.length; i++) {
+            if (calculatorArray[i - 1] === "(" && !isNaN(parseFloat(calculatorArray[i].toString())) && calculatorArray[i + 1] === ")") {
                 calculatorArray.splice(i - 1, 1);
                 i--;
                 calculatorArray.splice(i + 1, 1);
                 i--;
-                if (typeof parenthesisCounter === 'number') {
-                    finalParenthesis = parenthesisCounter;
-                    toLoop = false;
-                  } 
             }
-        }                  
-    } 
+        }
+    }
     // solve multiplication and division that are outside of the parenthesis
     function solveMultiplicationAndDivision(calculatorArray: Array<number | string>): void {
         for (let i = 0; i < calculatorArray.length; i++) {
@@ -907,9 +988,12 @@ function eventFunction() {
                 calculatorArray[i - 1] = (calculatorArray[i - 1] as number) / (calculatorArray[i + 1] as number);
                 calculatorArray.splice(i, 2);
             }
-            if (i === calculatorArray.length - 1 && calculatorArray.includes("*") || calculatorArray.includes("/")) {
-                i = 0;
+            function arrayContains(arr: Array<any>, val: any): boolean {
+                return arr.indexOf(val) !== -1;
             }
+            if (i === calculatorArray.length - 1 && (arrayContains(calculatorArray, "*") || arrayContains(calculatorArray, "/"))) {
+                i = 0;
+              }
         }
     }
     // solve addition and subtraction that are outside of the parenthesis
