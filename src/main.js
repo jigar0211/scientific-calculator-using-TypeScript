@@ -1,18 +1,5 @@
 var calculatorDisplay = document.querySelector(".display-container");
 var numberButtons = document.querySelectorAll('.number-button');
-// numbers
-var zero = document.querySelector("#zero");
-var one = document.getElementById("one");
-var two = document.querySelector("#two");
-var three = document.querySelector("#three");
-var four = document.querySelector("#four");
-var five = document.querySelector("#five");
-var six = document.querySelector("#six");
-var seven = document.querySelector("#seven");
-var height = document.querySelector("#eight");
-var nine = document.querySelector("#nine");
-var pi = document.querySelector('#pi');
-var constantE = document.querySelector('#constantE');
 // operator
 var openParenthesis = document.querySelector("#opened-parenthesis");
 var closedParenthesis = document.querySelector("#closed-parenthesis");
@@ -28,9 +15,6 @@ var moduloButton = document.querySelector('#modulo');
 var exponentButton = document.querySelector('#exponent');
 var plusminusButton = document.querySelector('#plusminus');
 var xsqureButton = document.querySelector("#xsqure");
-var exp = document.querySelector("#exp");
-var squreroot = document.querySelector("#ysqrx");
-var logyxButton = document.querySelector("#logyx");
 // calculator array
 var calculatorArray = [];
 var calculatorDomArray = [];
@@ -71,80 +55,23 @@ function eventFunction() {
             }
         });
     });
-    pi.addEventListener("click", function () {
-        if (characterCounter < 1) {
-            characterCounter++;
-            appendNumber(3.14);
-        }
-    });
-    constantE.addEventListener("click", function () {
-        if (characterCounter < 1) {
-            characterCounter++;
-            appendNumber(2.718281828459045);
-        }
-    });
-    // operator event listener 
-    decimalButton.addEventListener("click", function () {
-        characterCounter++;
-        appendNumber(".");
-    });
-    plusButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("+");
-    });
-    lessButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("-");
-    });
-    multiplicationButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("*");
-    });
-    divideButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("/");
-    });
-    moduloButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("%");
-    });
-    exponentButton.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("^");
-    });
-    exp.addEventListener("click", function () {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber(".e+");
-        }
-    });
-    squreroot.addEventListener("click", function () {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber("√");
-        }
-    });
-    logyxButton.addEventListener("click", function () {
-        if (characterCounter < 5) {
-            characterCounter++;
-            appendNumber("ylog");
-        }
-    });
-    openParenthesis.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber("(");
-    });
-    closedParenthesis.addEventListener("click", function () {
-        tempcharacterCounter = characterCounter;
-        characterCounter = 0;
-        appendNumber(")");
+    var buttons = [
+        { element: decimalButton, value: "." },
+        { element: plusButton, value: "+" },
+        { element: lessButton, value: "-" },
+        { element: multiplicationButton, value: "*" },
+        { element: divideButton, value: "/" },
+        { element: moduloButton, value: "%" },
+        { element: exponentButton, value: "^" },
+        { element: openParenthesis, value: "(" },
+        { element: closedParenthesis, value: ")" },
+    ];
+    buttons.forEach(function (button) {
+        button.element.addEventListener("click", function () {
+            tempcharacterCounter = characterCounter;
+            characterCounter = 0;
+            appendNumber(button.value);
+        });
     });
     // for 2nd Button Start
     var secondbutton = document.querySelector("#secondbtn");

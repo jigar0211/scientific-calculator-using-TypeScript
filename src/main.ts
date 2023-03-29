@@ -713,62 +713,6 @@ function eventFunction() {
         
         } while (toLoop === true && /\(|\)/.test(calculatorArray.join('')));      
     }
-    // function solveMultiplicationAndDivisionInParenthesis() {
-    //     let finalParenthesis: number = 0;
-      
-    //     let hasOpenParenthesis = false;
-    //     let hasClosedParenthesis = false;
-
-    //     for (let i = 0; i < calculatorArray.length; i++) {
-    //     if (calculatorArray[i] === "(") {
-    //         hasOpenParenthesis = true;
-    //     }
-    //     if (calculatorArray[i] === ")") {
-    //         hasClosedParenthesis = true;
-    //     }
-    //     }
-
-    //     if (hasOpenParenthesis && hasClosedParenthesis) {
-    //         // Find the innermost pair of parentheses
-    //         for (let j = calculatorArray.length - 1; j >= 0; j--) {
-    //             if (calculatorArray[j] === ")") {
-    //             finalParenthesis = j;
-    //             break;
-    //             }
-    //         }
-    //         let parenthesisCounter: number | undefined;
-    //         let counter: number | undefined;
-        
-    //         for (let i = 0; i < calculatorArray.length; i++) {
-    //             if (calculatorArray[i] === "(" && i < finalParenthesis) {
-    //             parenthesisCounter = i;
-    //             counter = parenthesisCounter + 1;
-    //             }
-    //         }
-        
-    //         if (typeof counter === "number") {
-    //             let toLoop: boolean = true;
-    //             while (toLoop === true && counter < finalParenthesis) {
-    //             toLoop = false;
-    //             for (let i = counter; i < finalParenthesis; i++) {
-    //                 if (calculatorArray[i] === "*" || calculatorArray[i] === "/") {
-    //                 toLoop = true;
-    //                 break;
-    //                 }
-    //             }
-    //             if (toLoop === true) {
-    //                 multiplyDivide(counter);
-    //                 sumSubtract(counter);
-    //             }
-    //             }
-    //             // Remove the parentheses and their contents
-    //             if (typeof parenthesisCounter === 'number') {
-    //                 calculatorArray.splice(parenthesisCounter, finalParenthesis - parenthesisCounter + 1);
-    //             }
-    //         }
-    //     }
-        
-    //   }      
       function multiplyDivide(operatorChecker: number): void {
         const operations = [
           { symbol: "*", perform: (a: number, b: number) => a * b },
